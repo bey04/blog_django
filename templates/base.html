@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaz dev</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">Avaz dev</a></h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'new_post' %}">Yangi post yozish</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    {% if user.is_authenticated %}
+        <p>Xush kelibsiz, {{ user.username }}!</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Chiqib ketish</button>
+        </form>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}">Saytga kirish</a> | 
+            <a href="{% url 'signup' %}">Ro'yxatdan o'tish</a>
+        </p>
+    {% endif %}
+
+    <div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Avaz dev. Barcha huquqlar himoyalangan.</p>
+        <p><a href="{% url 'home' %}">Bosh sahifa</a></p>
+    </footer>
+</body>
+</html>
