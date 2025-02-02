@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # ALLOWED_HOSTS
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'blogplatform.onrender.com').split(',')
+ALLOWED_HOSTS = ["blogplatform.onrender.com", "127.0.0.1", "localhost"]
 
 # Installed Apps
 INSTALLED_APPS = [
